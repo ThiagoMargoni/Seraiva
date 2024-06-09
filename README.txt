@@ -19,4 +19,4 @@ username: author
 password: author
 
 railway url: https://seraiva-production-e328.up.railway.app/
-vercel url: 
+vercel url: https://seraiva-iota.vercel.app/
