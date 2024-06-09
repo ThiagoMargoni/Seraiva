@@ -58,7 +58,13 @@
             redirectTo: '/'
         },
         {
-            item: 'App Books',
+            item: 'Apr Books',
+            icon: 'material-symbols-light:book-5-rounded',
+            permission: authStore.hasPermission('Librarian'),
+            redirectTo: '/'
+        },
+        {
+            item: 'Apr Authors',
             icon: 'ic:baseline-thumbs-up-down',
             permission: authStore.hasPermission('Librarian'),
             redirectTo: '/'

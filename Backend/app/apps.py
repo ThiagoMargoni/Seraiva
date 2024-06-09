@@ -7,6 +7,7 @@ class AppConfig(AppConfig):
 
     def ready(self):
         from .jobs import StartScheduler
+        from .signals import add_user_to_default_group
 
         print('Django App is Ready!!!')
 

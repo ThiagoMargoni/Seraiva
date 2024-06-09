@@ -8,7 +8,7 @@ export enum STATUS {
 
 export type GetBookLoan = {
     book_id: GetBook,
-    devololuption_date: Date,
+    devoluption_date: Date,
     real_devoluption_date?: Date,
     status: STATUS
 }

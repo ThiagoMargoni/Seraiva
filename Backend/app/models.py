@@ -61,10 +61,10 @@ class BookLoan(models.Model):
     book_id = models.ForeignKey(Book, related_name='bookloan_book_id', on_delete=models.CASCADE)
     loan_id = models.ForeignKey(Loan, related_name='bookloan_loan_id', on_delete=models.CASCADE)
     devoluption_date = models.DateField()
-    real_devoluption_date = models.DateField()
+    real_devoluption_date = models.DateField(null=True)
     status = models.CharField(max_length=30, null=False, blank=False, choices=STATUS)
 
     def save(self, *args, **kwargs):
         now = datetime.now().date()
         self.devoluption_date = now + timedelta(days=15)
-        self.save()
+        super().save(*args, **kwargs)

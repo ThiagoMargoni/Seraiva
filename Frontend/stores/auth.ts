@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import type { User } from "~/models/user";
 
 export const useAuthStore = defineStore('useAuthStore', () => {
-  const { data, signOut } = useAuth();
+  const { data, signOut, token } = useAuth();
 
   const user = computed<User | null>(() => {
     if (data.value) {
@@ -11,6 +11,8 @@ export const useAuthStore = defineStore('useAuthStore', () => {
 
     return null;
   });
+
+  const userToken = computed(() => token.value);
 
   const isAuthenticated = computed(() => !!user.value);
   const userRoles = computed(() => user.value?.groups || []);
@@ -21,6 +23,7 @@ export const useAuthStore = defineStore('useAuthStore', () => {
 
   return {
     user,
+    userToken,
     isAuthenticated,
     userRoles,
     hasPermission,

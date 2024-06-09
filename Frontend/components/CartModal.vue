@@ -1,5 +1,7 @@
 <script setup lang="ts">
     import { useCartStore, type Cart } from '~/stores/cart';
+    import { saveLoan } from '~/services/loan';
+    import { toast } from 'vue3-toastify';
 
     const cartStore = useCartStore();
 
@@ -7,8 +9,28 @@
         middleware: 'auth'
     });
 
-    const saveLoan = () => {
+    const clickSaveLoan = async () => {
+        const data = await saveLoan(cartStore.returnCreateLoanObj());
+        
+        if(data) {
+            toast(`Your loan was successfully made`, {
+                theme: 'light',
+                type: 'success',
+                transition: 'slide',
+                dangerouslyHTMLString: true,
+                autoClose: 2000
+            });
 
+            cartStore.clearCart();
+        } else {
+            toast(`Error while saving the loan`, {
+                theme: 'light',
+                type: 'error',
+                transition: 'slide',
+                dangerouslyHTMLString: true,
+                autoClose: 2000
+            });
+        }
     }
 
     function getDatePlus15Days() {
@@ -71,6 +93,11 @@
                         <th></th>
                         <th>Total: ${{ cartStore.getTotalCart }}</th>
                         <th>Devoluption Date: {{ getDatePlus15Days() }}</th>
+                        <th class="bg-black text-white w-[6%] rounded-lg mt-3" @click="clickSaveLoan()">
+                            <Button class="w-full">
+                                Finish Loan
+                            </Button>
+                        </th>
                     </tr>
                 </tfoot>
             </table>

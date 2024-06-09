@@ -80,7 +80,7 @@ class ReturnBookSerializer(serializers.ModelSerializer):
 class CreateBookLoanSerializer(serializers.ModelSerializer):
     class Meta:
         model = BookLoan
-        fields = '__all__'
+        fields = ['book_id', 'status']
 
 class ReturnBookLoanSerializer(serializers.ModelSerializer):
     book_id = ReturnBookSerializer()
@@ -90,9 +90,24 @@ class ReturnBookLoanSerializer(serializers.ModelSerializer):
         fields = ['book_id', 'devoluption_date', 'real_devoluption_date', 'status']
 
 class CreateLoanSerializer(serializers.ModelSerializer):
+    book_loans = CreateBookLoanSerializer(many=True, source='bookloan_loan_id')
+
     class Meta:
         model = Loan
-        fields = '__all__'
+        fields = ['loan_id', 'user_id', 'date', 'total', 'book_loans']  
+
+    def create(self, validated_data):
+        bookloans_data = validated_data.pop('bookloan_loan_id') 
+        loan = Loan.objects.create(**validated_data)
+        for bookloan_data in bookloans_data:
+            book = Book.objects.get(pk=bookloan_data['book_id'].book_id)
+            if book.quantity > 0:
+                book.quantity -= 1
+                book.save()
+                BookLoan.objects.create(loan_id=loan, **bookloan_data)
+            else:
+                raise serializers.ValidationError(f"Book {book.title} is out of stock.")
+        return loan
 
 class ReturnLoanSerializer(serializers.ModelSerializer):
     book_loans = ReturnBookLoanSerializer(source='bookloan_loan_id', many=True, read_only=True)
