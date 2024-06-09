@@ -45,5 +45,6 @@ export default defineNuxtConfig({
       url: 'https://api.iconify.design',
       publicApiFallback: true,
     }
-  }
+  },
+  appConfig: { nuxtIcon: {}}
 })
