@@ -22,7 +22,7 @@ export default defineNuxtConfig({
     'vue3-toastify/dist/index.css'
   ],
   auth: {
-    baseURL: 'http://localhost:8000',
+    baseURL: 'https://seraiva-production-e328.up.railway.app/',
     provider: {
       type: 'local',
       endpoints: {

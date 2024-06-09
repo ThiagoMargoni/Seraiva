@@ -33,7 +33,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 
 ALLOWED_HOSTS = ['*']
 CORS_ALLOW_ALL_ORIGINS=True
-CSRF_TRUSTED_ORIGINS = ['seraiva-production-e328.up.railway.app', 'https://seraiva-production-e328.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['https://seraiva-production-e328.up.railway.app', 'http://localhost']
 
 # Application definition
 
