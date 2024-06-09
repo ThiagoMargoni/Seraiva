@@ -1,1 +1,1 @@
-export const BACKEND_URL="https://seraiva-production-e328.up.railway.app/"
+export const BACKEND_URL="https://seraiva-production-e328.up.railway.app"

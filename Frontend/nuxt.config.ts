@@ -22,7 +22,7 @@ export default defineNuxtConfig({
     'vue3-toastify/dist/index.css'
   ],
   auth: {
-    baseURL: 'https://seraiva-production-e328.up.railway.app/',
+    baseURL: 'https://seraiva-production-e328.up.railway.app',
     provider: {
       type: 'local',
       endpoints: {
@@ -36,6 +36,14 @@ export default defineNuxtConfig({
       sessionDataType: {
         results: 'Array'
       }
+    }
+  },
+  icon: {
+    size: '24px',
+    class: 'icon',
+    iconifyApiOptions: {
+      url: 'https://api.iconify.design',
+      publicApiFallback: true,
     }
   }
 })

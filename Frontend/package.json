@@ -10,6 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@nuxtjs/icon": "^3.0.0-beta.16",
     "@pinia/nuxt": "^0.5.1",
     "nuxt": "^3.11.2",
     "nuxt-storage": "^1.2.2",
