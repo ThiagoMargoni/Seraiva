@@ -18,5 +18,5 @@ AUTHOR:
 username: author
 password: author
 
-railway url: 
+railway url: https://seraiva-production-e328.up.railway.app/
 vercel url: 
