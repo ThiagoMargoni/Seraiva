@@ -1,0 +1,93 @@
+CREATE TABLE books 
+( 
+ book_id INT PRIMARY KEY AUTO_INCREMENT,  
+ title VARCHAR(n) NOT NULL,  
+ quantity INT NOT NULL,  
+ price FLOAT NOT NULL,  
+ cover CHAR(n) NOT NULL,  
+ description VARCHAR(n) NOT NULL,  
+ number_pages INT NOT NULL,  
+ format VARCHAR(n) NOT NULL,  
+ publication_year VARCHAR(n) NOT NULL,  
+ UNIQUE (title)
+); 
+
+CREATE TABLE book_image 
+( 
+ idbooks INT,  
+ image_path INT NOT NULL,  
+); 
+
+CREATE TABLE book_gender 
+( 
+ idbooks INT,  
+ idgenders INT,  
+); 
+
+CREATE TABLE genders 
+( 
+ gender_id INT PRIMARY KEY AUTO_INCREMENT,  
+ name VARCHAR(n) NOT NULL,  
+); 
+
+CREATE TABLE loans 
+( 
+ loan_id INT PRIMARY KEY AUTO_INCREMENT,  
+ loan_date DATE NOT NULL,  
+ loan_total DATE NOT NULL AUTO_INCREMENT,  
+ idusers INT,  
+); 
+
+CREATE TABLE books_loan 
+( 
+ idbooks INT,  
+ idpurchases INT,  
+ quantity INT NOT NULL,  
+ total_value FLOAT NOT NULL,  
+ devoluption_date DATE NOT NULL,  
+ status VARCHAR(n) NOT NULL,  
+); 
+
+CREATE TABLE users 
+( 
+); 
+
+CREATE TABLE saga_book 
+( 
+ idbooks INT,  
+ idsaga INT,  
+ volume VARCHAR(n) NOT NULL,  
+); 
+
+CREATE TABLE saga 
+( 
+ name VARCHAR(n) NOT NULL,  
+ saga_id INT PRIMARY KEY AUTO_INCREMENT,  
+ creation_date DATE NOT NULL,  
+ finish_date DATE NOT NULL,  
+); 
+
+CREATE TABLE book_author 
+( 
+ idbooks INT,  
+ idauthor INT,  
+); 
+
+CREATE TABLE author 
+( 
+ image CHAR(n) NOT NULL,  
+ biography VARCHAR(n) NOT NULL,  
+ nickname VARCHAR(n) NOT NULL,  
+ author_od INT PRIMARY KEY AUTO_INCREMENT,  
+); 
+
+ALTER TABLE book_image ADD FOREIGN KEY(idbooks) REFERENCES books (idbooks)
+ALTER TABLE book_gender ADD FOREIGN KEY(idbooks) REFERENCES books (idbooks)
+ALTER TABLE book_gender ADD FOREIGN KEY(idgenders) REFERENCES genders (idgenders)
+ALTER TABLE loans ADD FOREIGN KEY(idusers) REFERENCES users (idusers)
+ALTER TABLE books_loan ADD FOREIGN KEY(idbooks) REFERENCES books (idbooks)
+ALTER TABLE books_loan ADD FOREIGN KEY(idpurchases) REFERENCES loans (idpurchases)
+ALTER TABLE saga_book ADD FOREIGN KEY(idbooks) REFERENCES books (idbooks)
+ALTER TABLE saga_book ADD FOREIGN KEY(idsaga) REFERENCES saga (idsaga)
+ALTER TABLE book_author ADD FOREIGN KEY(idbooks) REFERENCES books (idbooks)
+ALTER TABLE book_author ADD FOREIGN KEY(idauthor) REFERENCES author (idauthor)
